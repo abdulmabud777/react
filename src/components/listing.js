@@ -18,11 +18,14 @@ const Listing = () => {
     useEffect(() => {
         console.log('use EFFECT');
         const getProducts = async()=> {
+            localStorage.setItem('products', JSON.stringify(products))
             const productFromLocal =  await JSON.parse(localStorage.getItem('products')) || [];
-            productFromLocal.forEach((element, index )=> {
-                element.id = products.length + index + 1;
-            });
-            const totalProducts = [...products, ...productFromLocal]
+            console.log(`products from local ${productFromLocal}`);
+            // productFromLocal.forEach((element, index )=> {
+            //     element.id = products.length + index + 1;
+            // });
+            // const totalProducts = [...products, ...productFromLocal]
+            const totalProducts = [...productFromLocal]
             console.log('total products: ', totalProducts);
             const htmlElement = totalProducts.map((element, index) =>
             (

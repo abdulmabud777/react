@@ -61,6 +61,7 @@ function AddProduct() {
             if (values.hasOwnProperty(key)) {
                 if (key == 'file') {
                     values.image = base64String;
+                    values.id = Math.floor(Math.random()*100);
                     setFormData(values);
                     const updateLocalStorage = async ()=> {
                         // Retrieve existing form data from local storage

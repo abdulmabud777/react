@@ -20,16 +20,26 @@ import { NavLink } from 'react-router-dom';
 const ProductDetail = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart);
-    const handleAddToCart = () => {
-        const itemToAdd = {
-          id: 1, // Replace with the actual item ID
-          name: 'Product Name', // Replace with the actual product name
-          price: 19.99, // Replace with the actual product price
-          // Add more details as needed
-        };
+    const { id } = useParams();
+    
 
+    const handleAddToCart = async () => {
+        console.log('ab');
+        // const itemToAdd = {
+        //   id: 1, // Replace with the actual item ID
+        //   name: 'Product Name', // Replace with the actual product name
+        //   price: 19.99, // Replace with the actual product price
+        //   // Add more details as needed
+        // };
+
+        // get products from local store
+        const productsFromLocal =  await JSON.parse(localStorage.getItem('products')) || [];
+        // let selectedProduct = [];
+        let selectedProduct = productsFromLocal.filter((element)=> {
+            return element.id == id;
+        })
         const isItemAvailable = cart.filter(element => {
-            return element.id === itemToAdd.id
+            return element.id == id
         });
 
         if (isItemAvailable && isItemAvailable.length) {
@@ -46,32 +56,33 @@ const ProductDetail = () => {
               });
               }, 500);
         } else {
-            dispatch(addToCart(itemToAdd));
+            dispatch(addToCart(selectedProduct[0]));
         }
         
         
     }
-    const { id } = useParams();
+    
     const [product, setProduct] = useState({});
-    const products = [
-        { id: 1, price: '$123', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(1).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 1', desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book1` },
-        { id: 2, price: '$239', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(2).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 2', desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book2` },
-        { id: 3, price: '$147', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(3).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 3', desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book3` },
-        { id: 4, price: '$83', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(4).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 4', desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book4` },
-        { id: 5, price: '$88', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(5).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 5', desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book5` },
-        { id: 6, price: '$58', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(6).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 3', desc: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book3` },
-    ];
+    // const products = [
+    //     { id: 1, price: '$123', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(1).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 1', description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book1` },
+    //     { id: 2, price: '$239', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(2).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 2', description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book2` },
+    //     { id: 3, price: '$147', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(3).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 3', description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book3` },
+    //     { id: 4, price: '$83', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(4).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 4', description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book4` },
+    //     { id: 5, price: '$88', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(5).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 5', description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book5` },
+    //     { id: 6, price: '$58', image: "https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(6).webp", name: 'Lorem Ipsum is simply dummy text of the printing and typesetting 3', description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book3` },
+    // ];
 
-    console.log('without effect');
+    // console.log('without effect');
     
     useEffect(() => {
-        console.log('use EFFECT');
+        // console.log('use EFFECT');
         const getProducts = JSON.parse(localStorage.getItem('products'));
-        getProducts.forEach((element, index )=> {
-            element.id = products.length + index + 1;
-        });
-        const totalProducts = [...products, ...getProducts]
-        console.log('total products: ', totalProducts);
+        // getProducts.forEach((element, index )=> {
+        //     element.id = products.length + index + 1;
+        // });
+        // const totalProducts = [...products, ...getProducts]
+        const totalProducts = [...getProducts]
+        // console.log('total products: ', totalProducts);
         // setProduct(totalProducts);
         totalProducts.map((element) => {
             if (element.id == id) {
@@ -80,7 +91,7 @@ const ProductDetail = () => {
         })
     }, [])
 
-    console.log(product);
+    // console.log(product);
 
     return (
         <div>
@@ -128,7 +139,7 @@ const ProductDetail = () => {
                             <div className="d-flex flex-column ms-5">
 
                                 <div className="title-product">{product.name}</div>
-                                <div className="desc-product">{product.desc}</div>
+                                <div className="desc-product">{product.description}</div>
                                 <div className="price-product">{product.price}</div>
 
                                 <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">

@@ -23,6 +23,7 @@ const Header = () => {
     const handleConfirm = () => {
         // Perform action on confirmation
         dispatch(logout());
+        localStorage.removeItem('userDetails');
         console.log('Confirmed!');
         closeModal();
         toast.success('Logout successfully!', {
@@ -67,7 +68,8 @@ const Header = () => {
                                 <NavLink className="nav-link" to="/addproduct">Add Product</NavLink>
                             </li>  */}
                             <li className="nav-item">
-                                <a className="nav-link">About</a>
+                                {/* <a className="nav-link">Contact Us</a> */}
+                                <NavLink className="nav-link" to="/contact">Contact Us</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -81,7 +83,7 @@ const Header = () => {
                             {user ? (<NavLink className="nav-link width-120" to="/addproduct">Add product</NavLink>) : ''}
                         </li>
                         <li className="nav-item">
-                            {user ? (<NavLink className="nav-link width-120" to="/addproduct">
+                            {user ? (<NavLink className="nav-link width-120" to="/cart">
                             <div id="cart-icon">
                                 🛒
                                 <span id="cart-badge">{cart && cart.length}</span>

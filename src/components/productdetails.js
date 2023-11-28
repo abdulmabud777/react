@@ -81,7 +81,7 @@ const ProductDetail = () => {
         //     element.id = products.length + index + 1;
         // });
         // const totalProducts = [...products, ...getProducts]
-        const totalProducts = [...getProducts]
+        const totalProducts = getProducts
         // console.log('total products: ', totalProducts);
         // setProduct(totalProducts);
         totalProducts.map((element) => {
@@ -113,7 +113,7 @@ const ProductDetail = () => {
                                 <div className="product-detail-image text-white">
                                     <div className="bg-image hover-zoom ripple shadow-1-strong rounded">
                                         <img src={product.image? product.image: 'https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/new/img(1).webp'}
-                                            className="w-100 max-height-500" />
+                                            className="w-100 max-height-500 image-fit" />
                                         {/* <a> */}
                                         <div className="mask" >
                                             <div className="d-flex justify-content-start align-items-start h-100">

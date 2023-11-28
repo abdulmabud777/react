@@ -4,23 +4,25 @@
 const userDetails = await JSON.parse(localStorage.getItem('userDetails')) || null;
 let initialState = {};
 
-initialState = {
-  user: null,
-  cart: [],
-};
+// initialState = {
+//   user: null,
+//   cart: [],
+// };
 
-// if (userDetails) {
-//   initialState = {
-//     user: {
-//       "email": userDetails.email,
-//       "password": userDetails.password
-//     }
-//   };
-// } else {
-//   initialState = {
-//     user: null,
-//   };
-// }
+if (userDetails) {
+  initialState = {
+    user: {
+      "email": userDetails.email,
+      "password": userDetails.password
+    },
+    cart: [],
+  };
+} else {
+  initialState = {
+    user: null,
+    cart: [],
+  };
+}
 
 
 
